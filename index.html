@@ -3,18 +3,29 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
     <title>Incremental</title>
   </head>
   <body>
     <div class="container">
       <div class="left">
-        left
+        <h1>Team FC</h1>
+        <div id="counter">
+          0 dollars
+        </div>
+        <div class="button" onclick="increment()">
+          <img src="button.png" alt="ball-button" width="50">
+        </div>
       </div>
       <div class="middle">
-        middle
+        <h1>Stats</h1>
+        <div id="stats">
+          You have made <span id="allTime"></span> dollars.
+        </div>
       </div>
       <div class="right">
-        right
+        <h1>Store</h1>
+        <button class="button" id="buyFan" onclick="buyFan()"> Buy a fan (10) - 0 </button>
       </div>
 
     </div>
