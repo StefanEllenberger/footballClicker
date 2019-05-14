@@ -4,9 +4,10 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script src="save.js"></script>
     <title>Incremental</title>
   </head>
-  <body>
+  <body onload="loadGame()">
     <div class="container">
       <div class="left">
         <h1>Team FC</h1>
@@ -14,13 +15,19 @@
           0 dollars
         </div>
         <div class="button" onclick="increment()">
-          <img src="button.png" alt="ball-button" width="50">
+          <img src="button.png" alt="ball-button" width=100>
         </div>
       </div>
       <div class="middle">
         <h1>Stats</h1>
         <div id="stats">
-          You have made <span id="allTime"></span> dollars.
+          You have made <span id="allTime"></span> dollars all-time.
+        </div>
+        <h1>Achievements</h1>
+        <div id="achievements">
+          <div id="achievement1" style="display:none">
+            You have reached 100 fans.
+          </div>
         </div>
       </div>
       <div class="right">
