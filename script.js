@@ -96,10 +96,12 @@ window.setInterval(function() {
 
 
 function saveGame() {
+  console.log("saved");
   localStorage.setItem("save", JSON.stringify(save));
 }
 
 function loadGame() {
+  console.log("loaded");
   var savegame = JSON.parse(localStorage.getItem("save"));
   if (typeof savegame.dollarCount !== "undefined") save.dollarCount = savegame.dollarCount;
   if (typeof savegame.allTimeDollarCount !== "undefined") save.allTimeDollarCount = savegame.allTimeDollarCount;
