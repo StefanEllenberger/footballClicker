@@ -4,8 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
-    <script src="save.js"></script>
-    <title>Incremental</title>
+    <title>FootballClicker</title>
   </head>
   <body onload="loadGame()">
     <div class="container">
@@ -27,13 +26,26 @@
         <h1>Achievements</h1>
         <div id="achievements">
           <div id="achievement1" style="display:none">
+            You have reached 25 fans.
+          </div>
+          <div id="achievement2" style="display:none">
+            You have reached 50 fans.
+          </div>
+          <div id="achievement3" style="display:none">
             You have reached 100 fans.
           </div>
         </div>
       </div>
       <div class="right">
         <h1>Store</h1>
-        <button class="button" id="buyFan" onclick="buyFan()"> Buy a fan (10) - 0 </button>
+        <div id="store">
+          <button class="button" id="buyFan" onclick="buyFan()"> Buy a fan (10) - 0 </button>
+          <button class="button" id="buyUltra" onclick="buyUltra()"> Buy an ultra (50) - 0 </button>
+        </div>
+        <h1>Upgrades</h1>
+        <div id="upgrades">
+        <button class="button" id="upgradeStadium" onclick="upgradeStadium()"> Upgrade stadium (10 000) - 0 </button>
+        </div>
       </div>
 
     </div>
