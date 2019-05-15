@@ -11,7 +11,7 @@ var save = {
 
 function update(){
   saveGame();
-  temp = (save.fanCount * 0.0033) + (save.ultraCount * 0.01): //increasers
+  temp = (save.fanCount * 0.0033) + (save.ultraCount * 0.01); //increasers
   save.dollarCount += temp;
   save.allTimeDollarCount += temp;
   updateElements();
