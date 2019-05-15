@@ -19,6 +19,7 @@ function update(){
   save.allTimeDollarCount += temp;
   updateElements();
   updateAchievements();
+  updateButtons();
 }
 
 function updateElements(){
@@ -31,6 +32,14 @@ function updateElements(){
 function updateAchievements(){
   if (save.fanCount >= 100){
     document.getElementById("achievement1").style = "display:visible";
+  }
+}
+
+function updateButtons(){
+  if (save.fanCost > save.dollarCount){
+    document.getElementById('buyFan').disabled = true;
+  } else {
+    document.getElementById('buyFan').disabled = false;
   }
 }
 

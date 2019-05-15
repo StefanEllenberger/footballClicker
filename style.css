@@ -4,3 +4,9 @@
   justify-content: space-around;
   align-items: stretch;
 }
+#ballButton:hover{
+  transform: scale(1.1);
+}
+#ballButton:active{
+  transform: scale(0.9);
+}
