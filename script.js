@@ -5,11 +5,13 @@ var save = {
   fanCount: 0,
   fanCost: 10,
   ultraCount: 0,
-  ultraCost: 50
+  ultraCost: 50,
+  stadiumCost: 10000,
+  stadiumCount: 0
 }
 
 
-function update(){
+function update() {
   saveGame();
   temp = (save.fanCount * 0.0033) + (save.ultraCount * 0.01); //increasers
   save.dollarCount += temp;
@@ -19,71 +21,85 @@ function update(){
   updateButtons();
 }
 
-function updateElements(){
-  document.getElementById("counter").innerHTML = "" + Math.floor(save.dollarCount) + " dollars";
-  document.getElementById("allTime").innerHTML = Math.floor(save.allTimeDollarCount);
+function updateElements() {
   document.title = Math.floor(save.dollarCount) + " dollars"
-  document.getElementById("buyFan").innerHTML = "Buy a fan (" + save.fanCost + ") - " + save.fanCount;
-  document.getElementById("buyUltra").innerHtml = "Buy an ultra (" + save.ultraCost + ") - " + save.ultraCount;
+  document.getElementById("counter").innerHTML = "" + Math.floor(save.dollarCount).toLocaleString() + " dollars";
+  document.getElementById("allTime").innerHTML = Math.floor(save.allTimeDollarCount).toLocaleString();
+  document.getElementById("buyFan").innerHTML = "Buy a fan (" + save.fanCost.toLocaleString() + ") - " + save.fanCount.toLocaleString();
+  document.getElementById("buyUltra").innerHTML = "Buy an ultra (" + save.ultraCost.toLocaleString() + ") - " + save.ultraCount.toLocaleString();
+  document.getElementById("upgradeStadium").innerHTML = "Upgrade stadium (" + save.stadiumCost.toLocaleString() + ") - " + save.stadiumCount.toLocaleString();
+
 }
 
-function updateAchievements(){
-  if (save.fanCount >= 25){
+function updateAchievements() {
+  if (save.fanCount >= 25) {
     document.getElementById("achievement1").style = "display:visible";
   }
-  if (save.fanCount >= 50){
+  if (save.fanCount >= 50) {
     document.getElementById("achievement2").style = "display:visible";
   }
-  if (save.fanCount >= 100){
+  if (save.fanCount >= 100) {
     document.getElementById("achievement3").style = "display:visible";
   }
 }
 
-function updateButtons(){
-  if (save.fanCost > save.dollarCount){
-    document.getElementById('buyFan').disabled = true;
-  } else {
-    document.getElementById('buyFan').disabled = false;
+function updateButtons() {
+  var buttons = document.getElementsByClassName("buyButton");
+  for (i = 0; i < buttons.length; i++) {
+    buttons[i].disabled = false;
   }
-  if (save.ultraCost > save.dollarCount){
+  if (save.fanCost > save.dollarCount) {
+    document.getElementById('buyFan').disabled = true;
+  }
+  if (save.ultraCost > save.dollarCount) {
     document.getElementById('buyUltra').disabled = true;
-  } else {
-    document.getElementById('buyUltra').disabled = false;
+  }
+  if (save.stadiumCost > save.dollarCount) {
+    document.getElementById('upgradeStadium').disabled = true;
   }
 }
 
-function increment(){
+function increment() {
   save.dollarCount++;
   save.allTimeDollarCount++;
 }
 
-function buyFan(){
-  if (save.dollarCount >= save.fanCost){
+function buyFan() {
+  if (save.dollarCount >= save.fanCost) {
     save.fanCount++;
     save.dollarCount -= save.fanCost;
-    save.fanCost = Math.floor(10 * Math.pow(1.1,save.fanCount));
+    save.fanCost = Math.floor(10 * Math.pow(1.1, save.fanCount));
   }
 }
 
-function buyUltra(){
-  if (save.dollarCount >= save.ultraCost){
+function buyUltra() {
+  if (save.dollarCount >= save.ultraCost) {
     save.ultraCount++;
     save.dollarCount -= save.ultraCost;
-    save.ultraCost = Math.floor(10 * Math.pow(1.1,save.ultraCount));
+    save.ultraCost = Math.floor(50 * Math.pow(1.1, save.ultraCount));
   }
 }
 
+function upgradeStadium(){
+  if (save.dollarCount >= save.stadiumCost) {
+    save.stadiumCount++;
+    save.dollarCount -= save.stadiumCost;
+    save.stadiumCost = save.stadiumCost * 10;
+  }
 
-window.setInterval(function(){
+}
+
+
+window.setInterval(function() {
   update();
 }, 33);
 
 
-function saveGame(){
-  localStorage.setItem("save",JSON.stringify(save));
+function saveGame() {
+  localStorage.setItem("save", JSON.stringify(save));
 }
 
-function loadGame(){
+function loadGame() {
   var savegame = JSON.parse(localStorage.getItem("save"));
   if (typeof savegame.dollarCount !== "undefined") save.dollarCount = savegame.dollarCount;
   if (typeof savegame.allTimeDollarCount !== "undefined") save.allTimeDollarCount = savegame.allTimeDollarCount;
@@ -94,11 +110,11 @@ function loadGame(){
 
 }
 
-function reset(){
+function reset() {
   save.dollarCount = 0;
   save.allTimeDollarCount = 0;
   save.fanCount = 0;
-  save.fanCost = 0;
+  save.fanCost = 10;
   save.ultraCount = 0;
-  save.ultraCost = 0;
+  save.ultraCost = 50;
 }
