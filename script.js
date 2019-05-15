@@ -7,6 +7,8 @@ var save = {
   fanCost: 10,
   ultraCount: 0,
   ultraCost: 50,
+  seasonTicketCount: 0,
+  seasonTicketCost: 1000,
   stadiumCost: 10000,
   stadiumCount: 0
 }
@@ -14,7 +16,7 @@ var save = {
 
 function update() {
   saveGame();
-  temp = (save.fanCount * 0.0033) + (save.ultraCount * 0.01); //increasers
+  temp = (save.fanCount * 0.0033) + (save.ultraCount * 0.01) + (save.seasonTicketCount * 0.04); //increasers
   save.dollarCount += temp;
   save.allTimeDollarCount += temp;
   updateElements();
@@ -28,8 +30,8 @@ function updateElements() {
   document.getElementById("allTime").innerHTML = Math.floor(save.allTimeDollarCount).toLocaleString();
   document.getElementById("buyFan").innerHTML = "Buy a fan (" + save.fanCost.toLocaleString() + ") - " + save.fanCount.toLocaleString();
   document.getElementById("buyUltra").innerHTML = "Buy an ultra (" + save.ultraCost.toLocaleString() + ") - " + save.ultraCount.toLocaleString();
+  document.getElementById("buySeasonTicketHolder").innerHTML = "Buy a season ticket holder (" + save.seasonTicketCost.toLocaleString() + ") - " + save.seasonTicketCount.toLocaleString();
   document.getElementById("upgradeStadium").innerHTML = "Upgrade stadium (" + save.stadiumCost.toLocaleString() + ") - " + save.stadiumCount.toLocaleString();
-
 }
 
 function updateAchievements() {
@@ -55,6 +57,9 @@ function updateButtons() {
   if (save.ultraCost > save.dollarCount) {
     document.getElementById('buyUltra').disabled = true;
   }
+  if (save.seasonTicketCost > save.dollarCount) {
+    document.getElementById('buySeasonTicketHolder').disabled = true;
+  }
   if (save.stadiumCost > save.dollarCount) {
     document.getElementById('upgradeStadium').disabled = true;
   }
@@ -78,6 +83,13 @@ function buyUltra() {
     save.ultraCount++;
     save.dollarCount -= save.ultraCost;
     save.ultraCost = Math.floor(50 * Math.pow(1.1, save.ultraCount));
+  }
+}
+function buySeasonTicketHolder() {
+  if (save.dollarCount >= save.seasonTicketCost) {
+    save.seasonTicketCount++;
+    save.dollarCount -= save.seasonTicketCost;
+    save.seasonTicketCost = Math.floor(1000 * Math.pow(1.1, save.ultraCount));
   }
 }
 
@@ -115,6 +127,8 @@ function loadGame(callback) {
   if (typeof savegame.fanCost !== "undefined") save.fanCost = savegame.fanCost;
   if (typeof savegame.ultraCount !== "undefined") save.ultraCount = savegame.ultraCount;
   if (typeof savegame.ultraCost !== "undefined") save.ultraCost = savegame.ultraCost;
+  if (typeof savegame.seasonTicketCount !== "undefined") save.seasonTicketCount = savegame.seasonTicketCount;
+  if (typeof savegame.seasonTicketCost !== "undefined") save.seasonTicketCost = savegame.seasonTicketCost;
   callback();
 
 }
@@ -126,4 +140,6 @@ function reset() {
   save.fanCost = 10;
   save.ultraCount = 0;
   save.ultraCost = 50;
+  save.seasonTicketCount = 0;
+  save.seasonTicketCost = 1000;
 }
