@@ -1,4 +1,5 @@
 //counters
+var loaded = false;
 var save = {
   dollarCount: 0,
   allTimeDollarCount: 0,
@@ -91,7 +92,9 @@ function upgradeStadium(){
 
 
 window.setInterval(function() {
-  update();
+  if (loaded){
+    update();
+  }
 }, 33);
 
 
@@ -100,8 +103,11 @@ function saveGame() {
   localStorage.setItem("save", JSON.stringify(save));
 }
 
-function loadGame() {
-  console.log("loaded");
+function initialLoad(){
+  loadGame(() => {loaded = true;});
+}
+
+function loadGame(callback) {
   var savegame = JSON.parse(localStorage.getItem("save"));
   if (typeof savegame.dollarCount !== "undefined") save.dollarCount = savegame.dollarCount;
   if (typeof savegame.allTimeDollarCount !== "undefined") save.allTimeDollarCount = savegame.allTimeDollarCount;
@@ -109,6 +115,7 @@ function loadGame() {
   if (typeof savegame.fanCost !== "undefined") save.fanCost = savegame.fanCost;
   if (typeof savegame.ultraCount !== "undefined") save.ultraCount = savegame.ultraCount;
   if (typeof savegame.ultraCost !== "undefined") save.ultraCost = savegame.ultraCost;
+  callback();
 
 }
 
