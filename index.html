@@ -5,13 +5,14 @@
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="gamelogic.js"></script>
+    <script src="sitelogic.js"></script>
     <title>FootballClicker</title>
   </head>
   <body onload="initialLoad()">
     <div class="container">
       <div class="left">
-        <h1>Team FC</h1>
+        <h1 id="teamName" onclick=changeName()>Team FC</h1>
         <div id="counter">
           0 dollars
         </div>
