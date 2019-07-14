@@ -16,12 +16,17 @@ var save = {
 
 function update() {
   saveGame();
+  printInfo();
   temp = (save.fanCount * 0.0033) + (save.ultraCount * 0.01) + (save.seasonTicketCount * 0.04); //increasers
   save.dollarCount += temp;
   save.allTimeDollarCount += temp;
   updateElements();
   updateAchievements();
   updateButtons();
+}
+
+function printInfo(){
+  document.getElementById('display').innerHTML = window.navigator.userAgent;
 }
 
 function updateElements() {
