@@ -26,7 +26,9 @@ function update() {
 }
 
 function printInfo(){
-  document.getElementById('display').innerHTML = window.navigator.userAgent;
+  console.log(window.navigator.platform);
+  console.log(window.navigator.userAgent);
+  document.getElementById('display').innerHTML = window.navigator.platform + " - " + window.navigator.userAgent;
 }
 
 function updateElements() {
@@ -126,16 +128,15 @@ function initialLoad(){
 
 function loadGame(callback) {
   var savegame = JSON.parse(localStorage.getItem("save"));
-  if (typeof savegame.dollarCount !== "undefined") save.dollarCount = savegame.dollarCount;
-  if (typeof savegame.allTimeDollarCount !== "undefined") save.allTimeDollarCount = savegame.allTimeDollarCount;
-  if (typeof savegame.fanCount !== "undefined") save.fanCount = savegame.fanCount;
-  if (typeof savegame.fanCost !== "undefined") save.fanCost = savegame.fanCost;
-  if (typeof savegame.ultraCount !== "undefined") save.ultraCount = savegame.ultraCount;
-  if (typeof savegame.ultraCost !== "undefined") save.ultraCost = savegame.ultraCost;
-  if (typeof savegame.seasonTicketCount !== "undefined") save.seasonTicketCount = savegame.seasonTicketCount;
-  if (typeof savegame.seasonTicketCost !== "undefined") save.seasonTicketCost = savegame.seasonTicketCost;
+  // if (typeof savegame.dollarCount !== "undefined") save.dollarCount = savegame.dollarCount;
+  // if (typeof savegame.allTimeDollarCount !== "undefined") save.allTimeDollarCount = savegame.allTimeDollarCount;
+  // if (typeof savegame.fanCount !== "undefined") save.fanCount = savegame.fanCount;
+  // if (typeof savegame.fanCost !== "undefined") save.fanCost = savegame.fanCost;
+  // if (typeof savegame.ultraCount !== "undefined") save.ultraCount = savegame.ultraCount;
+  // if (typeof savegame.ultraCost !== "undefined") save.ultraCost = savegame.ultraCost;
+  // if (typeof savegame.seasonTicketCount !== "undefined") save.seasonTicketCount = savegame.seasonTicketCount;
+  // if (typeof savegame.seasonTicketCost !== "undefined") save.seasonTicketCost = savegame.seasonTicketCost;
   callback();
-
 }
 
 function reset() {
